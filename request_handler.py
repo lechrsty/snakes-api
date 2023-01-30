@@ -51,7 +51,7 @@ class HandleRequests(BaseHTTPRequestHandler):
                     self._set_headers(200)
             else:
                 self._set_headers(404)
-                response = {"message": "Resource not found"}
+                response = ""
 
         else:  # There is a ? in the path, run the query param functions
             (resource, query) = parsed
@@ -64,12 +64,12 @@ class HandleRequests(BaseHTTPRequestHandler):
 
     def do_PUT(self):
         self._set_headers(404)
-        response = {"error": "PUT requests are not supported for this endpoint"}
+        response = ""
         self.wfile.write(json.dumps(response).encode())
 
     def do_DELETE(self):
         self._set_headers(404)
-        response = {"error": "DELETE requests are not supported for this endpoint"}
+        response = ""
         self.wfile.write(json.dumps(response).encode())
 
 
@@ -94,11 +94,11 @@ class HandleRequests(BaseHTTPRequestHandler):
                 self._set_headers(400)
 
                 new_item = {
-                    "message": f'{"Name is required"}' if "name" not in post_body else "" f'{"Owner ID is required"}' if "owner_id" not in post_body else "" f'{"Species ID is required"}' if "species_id" not in post_body else "" f'{"Gender is required"}' if "gender" not in post_body else "" f'{"Color is required"}' if "color" not in post_body else ""
+                    "message": f'{"Name is required"}' if "name" not in post_body else "" f'{"Owner ID is required"}' if "owner_id" not in post_body else "" f'{"Species ID is required"}' if "species_id" not in post_body else "" f'{"Gender is required"}' if "gender" not in post_body else "" f'{"color is required"}' if "color" not in post_body else ""
                 }
         else:
             self._set_headers(404)
-            new_item = {"message": "Resource not found"}
+            new_item = ""
         self.wfile.write(json.dumps(new_item).encode())
     
     def _set_headers(self, status):
